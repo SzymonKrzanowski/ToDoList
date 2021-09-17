@@ -1,0 +1,75 @@
+﻿@model IEnumerable<ToDoList.Models.ToDoItem>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>ToDoList</h1>
+<form asp-controller="ToDoItems" asp-action="Index">
+    <p>
+        Title: <input type="text" name="stringSearch"  />
+               <input type="submit"  value="Filter" />
+    </p>
+
+</form>
+    <p style="text-align:right;margin-right:20px;">
+        <a asp-action="AddOrEditTask">Add New Task</a>
+    </p>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Details)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsDone)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+                    <th></th>
+                    <th>Edit </th>
+                    <th>Details</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Details)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsDone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                    <td>
+                        <a asp-action="AddOrEditTask" asp-route-id="@item.IdTask" class="btn btn-primary">Edit</a>
+
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.IdTask" class="btn btn-success">Details</a> 
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@item.IdTask" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+

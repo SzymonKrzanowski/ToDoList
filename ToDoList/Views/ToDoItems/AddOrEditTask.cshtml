@@ -1,0 +1,57 @@
+﻿@model ToDoList.Models.ToDoItem
+
+@{
+    ViewData["Title"] = "Add or Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container p-3 my-3 border">
+    <h1>@ViewBag.PageName </h1>
+
+    <div class="row">
+        <div class="col-sm-5">
+            <hr />
+            <form asp-action="AddOrEditTask">
+                <div asp-validation-summary="ModelOnly" class="text-danger"> </div>
+                @if (ViewBag.IsEdit == null)
+                {
+                    <input type="hidden" asp-for="IdTask" />
+                }
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Details" class="control-label"></label>
+                    <input asp-for="Details" class="form-control" />
+                    <span asp-validation-for="Details" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IsDone" class="control-label"></label>
+                    <input asp-for="IsDone" class="form-control" />
+                    <span asp-validation-for="IsDone" class="text-danger"></span>
+                </div>
+                <div asp-for="Date" class="form-group">
+                    <label asp-for="Date" class="control-label"></label>
+                    <input asp-for="Date" class="form-control">
+                    <div class="input-group-addon">
+                        <span asp-validation-for="Date"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input class="btn btn-primary" type="submit" value="Save" />
+                    <a class="btn btn-danger" asp-action="Index">Back</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}
